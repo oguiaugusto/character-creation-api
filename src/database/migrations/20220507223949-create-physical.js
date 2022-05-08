@@ -43,10 +43,6 @@ module.exports = {
       highlights: {
         type: Sequelize.STRING,
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
     });
   },
   async down(queryInterface, Sequelize) {

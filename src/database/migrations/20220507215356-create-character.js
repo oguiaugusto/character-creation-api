@@ -28,10 +28,6 @@ module.exports = {
       mother: {
         type: Sequelize.STRING,
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
     });
   },
   async down(queryInterface, _Sequelize) {

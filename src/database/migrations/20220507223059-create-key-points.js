@@ -37,10 +37,6 @@ module.exports = {
       love: {
         type: Sequelize.STRING,
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
     });
   },
   async down(queryInterface, Sequelize) {

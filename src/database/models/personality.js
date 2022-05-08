@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Personality.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     wants: DataTypes.STRING,
     hopes: DataTypes.STRING,
     fears: DataTypes.STRING,

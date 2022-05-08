@@ -9,10 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Story.init({
-    id: DataTypes.STRING(8),
+    id: { type: DataTypes.STRING(8), primaryKey: true },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    active: DataTypes.BOOLEAN,
   }, {
     sequelize,
     tableName: 'Stories',

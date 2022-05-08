@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Psychological.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     intelligence: DataTypes.STRING,
     temperament: DataTypes.STRING,
     selfKnowledge: DataTypes.STRING,

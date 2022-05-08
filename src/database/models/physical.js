@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Physical.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     age: DataTypes.STRING,
     weight: DataTypes.STRING,
     height: DataTypes.STRING,

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Personal.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     family: DataTypes.STRING,
     friends: DataTypes.STRING,
     colleagues: DataTypes.STRING,
@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     religion: DataTypes.STRING,
     profession: DataTypes.STRING,
     possessions: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
   }, {
     sequelize,
     tableName: 'Personals',

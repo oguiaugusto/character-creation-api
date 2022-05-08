@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   KeyPoints.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     goal: DataTypes.STRING,
     motivation: DataTypes.STRING,
     purpose: DataTypes.STRING,

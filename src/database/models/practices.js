@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Practices.init({
-    characterId: DataTypes.STRING(8),
+    characterId: { type: DataTypes.STRING(8), primaryKey: true },
     wears: DataTypes.STRING,
     eats: DataTypes.STRING,
     buys: DataTypes.STRING,

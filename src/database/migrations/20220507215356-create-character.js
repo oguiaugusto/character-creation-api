@@ -12,6 +12,8 @@ module.exports = {
         references: {
           model: 'Stories',
           key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
         },
       },
       name: {

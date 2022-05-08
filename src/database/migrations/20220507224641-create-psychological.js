@@ -9,6 +9,8 @@ module.exports = {
         references: {
           model: 'Characters',
           key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
         },
       },
       intelligence: {

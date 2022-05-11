@@ -1,3 +1,4 @@
 const StoryController = require('./Story');
+const CharacterController = require('./Character');
 
-module.exports = { StoryController };
+module.exports = { StoryController, CharacterController };

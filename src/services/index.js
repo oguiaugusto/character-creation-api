@@ -1,3 +1,4 @@
 const StoryService = require('./Story');
+const CharacterService = require('./Character');
 
-module.exports = { StoryService };
+module.exports = { StoryService, CharacterService };

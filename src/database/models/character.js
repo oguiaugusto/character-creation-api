@@ -6,12 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Character extends Model {
     static associate(models) {
       this.belongsTo(models.Story, { foreignKey: 'storyId', as: 'story' });
-      this.hasOne(models.KeyPoints, { foreignKey: 'characterId', as: 'keyPoints' });
-      this.hasOne(models.Physical, { foreignKey: 'characterId', as: 'physical' });
-      this.hasOne(models.Psychological, { foreignKey: 'characterId', as: 'psychological' });
-      this.hasOne(models.Personal, { foreignKey: 'characterId', as: 'personal' });
-      this.hasOne(models.Personality, { foreignKey: 'characterId', as: 'personality' });
-      this.hasOne(models.Practices, { foreignKey: 'characterId', as: 'practices' });
+      this.hasOne(models.KeyPoints, { foreignKey: 'characterId', as: 'keyPoints', onDelete: 'cascade', hooks: true });
     }
   }
   Character.init({

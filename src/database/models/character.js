@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Story, { foreignKey: 'storyId', as: 'story' });
       this.hasOne(models.KeyPoints, { foreignKey: 'characterId', as: 'keyPoints', onDelete: 'cascade', hooks: true });
+      this.hasOne(models.Extra, { foreignKey: 'characterId', as: 'extra', onDelete: 'cascade', hooks: true });
     }
   }
   Character.init({

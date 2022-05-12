@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { CharacterController, KeyPointsController } = require('../controllers');
+const { CharacterController, KeyPointsController, ExtraController } = require('../controllers');
 const { celebrate, Segments, Joi } = require('celebrate');
 
 router
@@ -62,5 +62,21 @@ router
       }),
     }), KeyPointsController.create
   );
+
+router
+  .route('/:id/extra')
+  .get(ExtraController.getById)
+  .put(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        info: Joi.string().not().empty().required(),
+      }),
+    }), ExtraController.create)
+  .post(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        info: Joi.string().not().empty().required(),
+      }),
+    }), ExtraController.create);;
 
 module.exports = router;

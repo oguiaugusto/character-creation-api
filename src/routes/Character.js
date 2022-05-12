@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { CharacterController } = require('../controllers');
+const { CharacterController, KeyPointsController } = require('../controllers');
 const { celebrate, Segments, Joi } = require('celebrate');
 
 router
@@ -16,19 +16,51 @@ router
       }),
     }), CharacterController.create);
 
-  router
-    .route('/:id')
-    .get(CharacterController.getById)
-    .delete(CharacterController.delete)
-    .put(
-      celebrate({
-        [Segments.BODY]: Joi.object().keys({
-          storyId: Joi.string().not().empty().optional(),
-          name: Joi.string().not().empty().optional(),
-          birthdate: Joi.string().not().empty().optional(),
-          father: Joi.string().not().empty().optional(),
-          mother: Joi.string().not().empty().optional(),
-        }),
-      }), CharacterController.update);
+router
+  .route('/:id')
+  .get(CharacterController.getById)
+  .delete(CharacterController.delete)
+  .put(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        storyId: Joi.string().not().empty().optional(),
+        name: Joi.string().not().empty().optional(),
+        birthdate: Joi.string().not().empty().optional(),
+        father: Joi.string().not().empty().optional(),
+        mother: Joi.string().not().empty().optional(),
+      }),
+    }), CharacterController.update);
+
+router
+  .route('/:id/keypoints')
+  .get(KeyPointsController.getById)
+  .put(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        goal: Joi.string().not().empty().optional(),
+        motivation: Joi.string().not().empty().optional(),
+        purpose: Joi.string().not().empty().optional(),
+        fears: Joi.string().not().empty().optional(),
+        virtues: Joi.string().not().empty().optional(),
+        flaws: Joi.string().not().empty().optional(),
+        peculiarities: Joi.string().not().empty().optional(),
+        love: Joi.string().not().empty().optional(),
+      }),
+    }), KeyPointsController.create
+  )
+  .post(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        goal: Joi.string().not().empty().optional(),
+        motivation: Joi.string().not().empty().optional(),
+        purpose: Joi.string().not().empty().optional(),
+        fears: Joi.string().not().empty().optional(),
+        virtues: Joi.string().not().empty().optional(),
+        flaws: Joi.string().not().empty().optional(),
+        peculiarities: Joi.string().not().empty().optional(),
+        love: Joi.string().not().empty().optional(),
+      }),
+    }), KeyPointsController.create
+  );
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { Character, Story } = require('../database/models');
+const { Character, Story, KeyPoints } = require('../database/models');
 const { RequestError, httpCodes, helpers } = require('../utils');
 
 const messages = {
@@ -57,7 +57,7 @@ class CharacterService {
   }
 
   static async getById(id) {
-    const character = await Character.findByPk(id);
+    const character = await Character.findByPk(id, { include: { model: KeyPoints, as: 'keyPoints' } });
 
     if (!character) throw new RequestError(messages.characterNotFound, httpCodes.NOT_FOUND);
     return character;

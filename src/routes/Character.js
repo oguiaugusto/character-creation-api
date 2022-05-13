@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { CharacterController, KeyPointsController, ExtraController } = require('../controllers');
+const auth = require('../middlewares/auth');
 const { celebrate, Segments, Joi } = require('celebrate');
 
 router
   .route('/')
-  .get(CharacterController.listAll)
+  .get(auth, CharacterController.listAll)
   .post(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         storyId: Joi.string().not().empty().required(),
@@ -18,9 +20,10 @@ router
 
 router
   .route('/:id')
-  .get(CharacterController.getById)
-  .delete(CharacterController.delete)
+  .get(auth, CharacterController.getById)
+  .delete(auth, CharacterController.delete)
   .put(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         storyId: Joi.string().not().empty().optional(),
@@ -33,8 +36,9 @@ router
 
 router
   .route('/:id/keypoints')
-  .get(KeyPointsController.getById)
+  .get(auth, KeyPointsController.getById)
   .put(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         goal: Joi.string().not().empty().optional(),
@@ -49,6 +53,7 @@ router
     }), KeyPointsController.create
   )
   .post(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         goal: Joi.string().not().empty().optional(),
@@ -65,14 +70,16 @@ router
 
 router
   .route('/:id/extra')
-  .get(ExtraController.getById)
+  .get(auth, ExtraController.getById)
   .put(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         info: Joi.string().not().empty().required(),
       }),
     }), ExtraController.create)
   .post(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         info: Joi.string().not().empty().required(),

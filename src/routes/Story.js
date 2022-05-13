@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { StoryController } = require('../controllers');
+const auth = require('../middlewares/auth');
 const { celebrate, Segments, Joi } = require('celebrate');
 
 router
   .route('/')
-  .get(StoryController.listAll)
+  .get(auth, StoryController.listAll)
   .post(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().not().empty().required(),
@@ -15,9 +17,10 @@ router
 
 router
   .route('/:id')
-  .get(StoryController.getById)
-  .delete(StoryController.delete)
+  .get(auth, StoryController.getById)
+  .delete(auth, StoryController.delete)
   .put(
+    auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().not().empty().optional(),
@@ -27,6 +30,6 @@ router
 
 router
   .route('/:id/characters')
-  .get(StoryController.getAllCharacters)
+  .get(auth, StoryController.getAllCharacters)
 
 module.exports = router;

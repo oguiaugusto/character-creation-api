@@ -50,7 +50,7 @@ class UserService {
   static async getByCredentials({ email, password }) {
     const user = await User.findOne({ where: { email, password } });
 
-    // if (!user) throw new RequestError(messages.credentialsError, httpCodes.UNAUTHORIZED);
+    if (!user) throw new RequestError(messages.credentialsError, httpCodes.UNAUTHORIZED);
     // it doest not throw error because its only used in the login controller
     return user;
   }

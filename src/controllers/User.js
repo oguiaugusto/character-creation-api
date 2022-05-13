@@ -14,7 +14,7 @@ class UserController {
     try {
       const { body: { email, password }, headers: { authorization } } = req;
 
-      console.log(authorization.toString());
+      console.log(authorization);
       console.log(CREATION_PASSWORD);
       if (authorization !== CREATION_PASSWORD) throw new RequestError(
         messages.unauthorized, httpCodes.UNAUTHORIZED,

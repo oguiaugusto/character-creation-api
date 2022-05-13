@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 const { Character, Story, KeyPoints, Extra } = require('../database/models');
 const { RequestError, httpCodes, helpers } = require('../utils');
 
@@ -19,7 +20,7 @@ class CharacterService {
     let characterId = helpers.getRandomId('CHA');
     while (allCharacters.some(({ id }) => id === characterId)) {
       characterId = helpers.getRandomId('CHA');
-    };
+    }
 
     const validKeys = helpers.getValidKeys({ birthdate, father, mother });
     const character = await Character.create({ id: characterId, storyId, name, ...validKeys });
@@ -36,7 +37,6 @@ class CharacterService {
     if (!existingStory) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);
 
     const validKeys = helpers.getValidKeys({ storyId, name, birthdate, father, mother });
-    console.log(validKeys);
     if (Object.keys(validKeys).length !== 0) {
       const character = await existingCharacter.update({ ...validKeys });
       return character;
@@ -57,14 +57,16 @@ class CharacterService {
   }
 
   static async getById(id) {
-    const character = await Character.findByPk(id, { include: [
-      { model: KeyPoints, as: 'keyPoints' },
-      { model: Extra, as: 'extra' },
-    ] });
+    const character = await Character.findByPk(id, {
+      include: [
+        { model: KeyPoints, as: 'keyPoints' },
+        { model: Extra, as: 'extra' },
+      ],
+    });
 
     if (!character) throw new RequestError(messages.characterNotFound, httpCodes.NOT_FOUND);
     return character;
   }
-};
+}
 
 module.exports = CharacterService;

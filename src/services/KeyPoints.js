@@ -16,19 +16,21 @@ class KeyPointsService {
       messages.characterNotFound, httpCodes.NOT_FOUND,
     );
 
-    const validKeys = helpers.getValidKeys({ goal, motivation, purpose, fears, virtues, flaws, peculiarities, love });
+    const validKeys = helpers.getValidKeys({
+      goal, motivation, purpose, fears, virtues, flaws, peculiarities, love,
+    });
 
     const existingKeyPoints = await KeyPoints.findByPk(characterId);
     if (method === 'PUT' && !existingKeyPoints) throw new RequestError(
-      messages.keyPointsNotFound, httpCodes.NOT_FOUND
+      messages.keyPointsNotFound, httpCodes.NOT_FOUND,
     );
     if (method === 'POST' && existingKeyPoints) throw new RequestError(
-      messages.keyPointsAlreadyRegistered, httpCodes.CONFLICT
+      messages.keyPointsAlreadyRegistered, httpCodes.CONFLICT,
     );
 
     const keyPoints = await (method === 'POST'
-     ? KeyPoints.create({ characterId, ...validKeys })
-     : existingKeyPoints.update({ ...validKeys }));
+      ? KeyPoints.create({ characterId, ...validKeys })
+      : existingKeyPoints.update({ ...validKeys }));
 
     return keyPoints;
   }
@@ -39,6 +41,6 @@ class KeyPointsService {
     if (!keyPoints) throw new RequestError(messages.keyPointsNotFound, httpCodes.NOT_FOUND);
     return keyPoints;
   }
-};
+}
 
 module.exports = KeyPointsService;

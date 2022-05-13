@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 const { Story, Character } = require('../database/models');
 const { RequestError, httpCodes, helpers } = require('../utils');
 
@@ -62,6 +63,6 @@ class StoryService {
     if (!story) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);
     return story;
   }
-};
+}
 
 module.exports = StoryService;

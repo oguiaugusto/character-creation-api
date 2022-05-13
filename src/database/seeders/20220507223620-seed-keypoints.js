@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, _Sequelize) {
+  async up(queryInterface, _Sequelize) {
     await queryInterface.bulkInsert('KeyPoints', [
       {
         characterId: 'CHA10001',
@@ -28,7 +28,7 @@ module.exports = {
     ], {});
   },
 
-  async down (queryInterface, _Sequelize) {
+  async down(queryInterface, _Sequelize) {
     await queryInterface.bulkDelete('KeyPoints', null, {});
-  }
+  },
 };

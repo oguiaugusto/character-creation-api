@@ -59,6 +59,6 @@ class StoryController {
       next(error);
     }
   }
-};
+}
 
 module.exports = StoryController;

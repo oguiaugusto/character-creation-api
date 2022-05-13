@@ -1,7 +1,9 @@
 'use strict';
+
 const {
-  Model
+  Model,
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class KeyPoints extends Model {
     static associate(models) {
@@ -17,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     virtues: DataTypes.STRING,
     flaws: DataTypes.STRING,
     peculiarities: DataTypes.STRING,
-    love: DataTypes.STRING
+    love: DataTypes.STRING,
   }, {
     sequelize,
     tableName: 'KeyPoints',

@@ -21,6 +21,6 @@ class KeypointsController {
       next(error);
     }
   }
-};
+}
 
 module.exports = KeypointsController;

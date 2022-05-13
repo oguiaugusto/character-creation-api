@@ -17,7 +17,7 @@ class UserController {
       console.log(authorization.toString());
       console.log(CREATION_PASSWORD);
       if (authorization !== CREATION_PASSWORD) throw new RequestError(
-        messages.unauthorized, httpCodes.UNAUTHORIZED
+        messages.unauthorized, httpCodes.UNAUTHORIZED,
       );
 
       const user = await UserService.create({ email, password });
@@ -47,13 +47,13 @@ class UserController {
       const user = await UserService.getById(req.params.id);
 
       if (!req.user.admin && req.params.id !== req.user.id) throw new RequestError(
-        messages.unauthorized, httpCodes.UNAUTHORIZED
+        messages.unauthorized, httpCodes.UNAUTHORIZED,
       );
       return res.status(httpCodes.OK).json(user);
     } catch (error) {
       next(error);
     }
   }
-};
+}
 
 module.exports = UserController;

@@ -16,7 +16,9 @@ class CharacterController {
   static async update(req, res, next) {
     try {
       const { body: { storyId, name, birthdate, father, mother }, params: { id } } = req;
-      const character = await CharacterService.update({ id, storyId, name, birthdate, father, mother });
+      const character = await CharacterService.update({
+        id, storyId, name, birthdate, father, mother,
+      });
 
       return res.status(httpCodes.OK).json(character);
     } catch (error) {
@@ -50,6 +52,6 @@ class CharacterController {
       next(error);
     }
   }
-};
+}
 
 module.exports = CharacterController;

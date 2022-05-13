@@ -1,5 +1,5 @@
 const { Extra, Character } = require('../database/models');
-const { RequestError, httpCodes, helpers } = require('../utils');
+const { RequestError, httpCodes } = require('../utils');
 
 const messages = {
   characterNotFound: 'Character not found',
@@ -16,10 +16,10 @@ class ExtraService {
 
     const existingExtra = await Extra.findByPk(characterId);
     if (method === 'PUT' && !existingExtra) throw new RequestError(
-      messages.extraNotFound, httpCodes.NOT_FOUND
+      messages.extraNotFound, httpCodes.NOT_FOUND,
     );
     if (method === 'POST' && existingExtra) throw new RequestError(
-      messages.extraAlreadyRegistered, httpCodes.CONFLICT
+      messages.extraAlreadyRegistered, httpCodes.CONFLICT,
     );
 
     const extra = await (method === 'POST'
@@ -35,6 +35,6 @@ class ExtraService {
     if (!extra) throw new RequestError(messages.extraNotFound, httpCodes.NOT_FOUND);
     return extra;
   }
-};
+}
 
 module.exports = ExtraService;

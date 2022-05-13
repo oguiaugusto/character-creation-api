@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const { celebrate, Segments, Joi } = require('celebrate');
 const { CharacterController, KeyPointsController, ExtraController } = require('../controllers');
 const auth = require('../middlewares/auth');
-const { celebrate, Segments, Joi } = require('celebrate');
 
 router
   .route('/')
@@ -16,7 +16,8 @@ router
         father: Joi.string().not().empty().optional(),
         mother: Joi.string().not().empty().optional(),
       }),
-    }), CharacterController.create);
+    }),
+    CharacterController.create);
 
 router
   .route('/:id')
@@ -32,7 +33,8 @@ router
         father: Joi.string().not().empty().optional(),
         mother: Joi.string().not().empty().optional(),
       }),
-    }), CharacterController.update);
+    }),
+    CharacterController.update);
 
 router
   .route('/:id/keypoints')
@@ -50,7 +52,8 @@ router
         peculiarities: Joi.string().not().empty().optional(),
         love: Joi.string().not().empty().optional(),
       }),
-    }), KeyPointsController.create
+    }),
+    KeyPointsController.create,
   )
   .post(
     auth,
@@ -65,7 +68,8 @@ router
         peculiarities: Joi.string().not().empty().optional(),
         love: Joi.string().not().empty().optional(),
       }),
-    }), KeyPointsController.create
+    }),
+    KeyPointsController.create,
   );
 
 router
@@ -77,13 +81,15 @@ router
       [Segments.BODY]: Joi.object().keys({
         info: Joi.string().not().empty().required(),
       }),
-    }), ExtraController.create)
+    }),
+    ExtraController.create)
   .post(
     auth,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         info: Joi.string().not().empty().required(),
       }),
-    }), ExtraController.create);;
+    }),
+    ExtraController.create);
 
 module.exports = router;

@@ -6,9 +6,9 @@ const messages = {
   noUser: 'Error finding token user',
 };
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, _res, next) => {
   try {
-    const token = req.headers['authorization'];
+    const token = req.headers.authorization;
     if (!token) throw new RequestError(messages.tokenNotFound, httpCodes.UNAUTHORIZED);
 
     const decoded = jwtUser.verify(token);

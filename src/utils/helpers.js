@@ -4,7 +4,7 @@ module.exports = {
   ),
   getValidKeys: (object) => (
     Object.fromEntries(
-      Object.entries(object).filter((entry) => entry[1])
+      Object.entries(object).filter((entry) => entry[1]),
     )
   ),
 };

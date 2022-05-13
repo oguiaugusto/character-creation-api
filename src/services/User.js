@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 const { User } = require('../database/models');
 const { RequestError, httpCodes, helpers } = require('../utils');
 
@@ -53,6 +54,6 @@ class UserService {
     // it doest not throw error because its only used in the login controller
     return user;
   }
-};
+}
 
 module.exports = UserService;

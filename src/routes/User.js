@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const { celebrate, Segments, Joi } = require('celebrate');
 const { UserController, login } = require('../controllers');
 const auth = require('../middlewares/auth');
-const { celebrate, Segments, Joi } = require('celebrate');
 
 router
   .route('/')
@@ -25,6 +25,6 @@ router
 
 router
   .route('/:id')
-  .get(auth, UserController.getById)
+  .get(auth, UserController.getById);
 
 module.exports = router;

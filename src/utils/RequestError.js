@@ -5,6 +5,6 @@ class RequestError extends Error {
     this.message = message;
     this.code = code;
   }
-};
+}
 
 module.exports = RequestError;

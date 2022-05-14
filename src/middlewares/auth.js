@@ -15,7 +15,7 @@ module.exports = async (req, _res, next) => {
 
     const user = await User.findOne({ where: { email: decoded.email } });
 
-    if (!user) throw new RequestError(messages.noUser);
+    if (!user) throw new RequestError(messages.noUser, httpCodes.UNAUTHORIZED);
     req.user = user;
 
     next();

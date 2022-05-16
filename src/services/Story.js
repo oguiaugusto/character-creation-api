@@ -35,6 +35,14 @@ class StoryService {
     return existingStory;
   }
 
+  static async updatePicture({ id, picture }) {
+    const existingStory = await Story.findByPk(id);
+    if (!existingStory) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);
+
+    const story = existingStory.update({ picture });
+    return story;
+  }
+
   static async delete(id) {
     const existingStory = await Story.findByPk(id);
     if (!existingStory) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);

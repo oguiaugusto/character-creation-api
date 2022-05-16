@@ -36,4 +36,15 @@ router
   .route('/:id/characters')
   .get(auth, StoryController.getAllCharacters);
 
+router
+  .route('/:id/picture')
+  .put(
+    auth,
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        picture: Joi.string().not().empty().required(),
+      }),
+    }),
+    StoryController.updatePicture);
+
 module.exports = router;

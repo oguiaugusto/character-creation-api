@@ -24,6 +24,17 @@ class StoryController {
     }
   }
 
+  static async updatePicture(req, res, next) {
+    try {
+      const { body: { picture }, params: { id } } = req;
+      const story = await StoryService.updatePicture({ id, picture });
+
+      return res.status(httpCodes.OK).json(story);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async delete(req, res, next) {
     try {
       await StoryService.delete(req.params.id);

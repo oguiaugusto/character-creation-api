@@ -10,6 +10,7 @@ router
       [Segments.BODY]: Joi.object().keys({
         email: Joi.string().email().not().empty().required(),
         password: Joi.string().not().empty().required(),
+        picture: Joi.string().not().empty().optional(),
       }),
     }), UserController.create);
 

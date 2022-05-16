@@ -9,7 +9,7 @@ const messages = {
 };
 
 class UserService {
-  static async create({ email, password }) {
+  static async create({ email, password, picture }) {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) throw new RequestError(messages.userAlreadyRegistered, httpCodes.CONFLICT);
 
@@ -20,17 +20,18 @@ class UserService {
       userId = helpers.getRandomId('USR');
     }
 
-    const user = await User.create({ id: userId, email, password });
+    console.log({ picture: picture || null });
+    const user = await User.create({ id: userId, email, password, picture: picture || null });
     delete user.dataValues.password;
 
     return user;
   }
 
-  static async update({ id, email, password }) {
+  static async update({ id, email, password, picture }) {
     const existingUser = await User.findByPk(id);
     if (!existingUser) throw new RequestError(messages.userNotFound, httpCodes.NOT_FOUND);
 
-    const validKeys = helpers.getValidKeys({ email, password });
+    const validKeys = helpers.getValidKeys({ email, password, picture });
     if (Object.keys(validKeys).length !== 0) {
       const user = await existingUser.update(validKeys);
       return user;

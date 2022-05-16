@@ -12,15 +12,13 @@ const messages = {
 class UserController {
   static async create(req, res, next) {
     try {
-      const { body: { email, password }, headers: { authorization } } = req;
+      const { body: { email, password, picture }, headers: { authorization } } = req;
 
-      console.log(authorization);
-      console.log(CREATION_PASSWORD);
       if (authorization !== CREATION_PASSWORD) throw new RequestError(
         messages.unauthorized, httpCodes.UNAUTHORIZED,
       );
 
-      const user = await UserService.create({ email, password });
+      const user = await UserService.create({ email, password, picture });
       const token = jwtUser.sign(user);
 
       return res.status(httpCodes.CREATED).json({ token });
@@ -31,9 +29,9 @@ class UserController {
 
   static async update(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, password, picture } = req.body;
 
-      const user = await UserService.update({ email, password });
+      const user = await UserService.update({ email, password, picture });
       const token = jwtUser.sign(user);
 
       return res.status(httpCodes.OK).json({ token });

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     birthdate: DataTypes.STRING,
     father: DataTypes.STRING,
     mother: DataTypes.STRING,
+    picture: DataTypes.STRING,
   }, {
     sequelize,
     tableName: 'Characters',

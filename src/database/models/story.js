@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.STRING(8), primaryKey: true },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
+    picture: DataTypes.STRING,
   }, {
     sequelize,
     tableName: 'Stories',

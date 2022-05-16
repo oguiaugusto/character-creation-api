@@ -4,8 +4,8 @@ const { httpCodes } = require('../utils');
 class StoryController {
   static async create(req, res, next) {
     try {
-      const { name, description } = req.body;
-      const story = await StoryService.create({ name, description });
+      const { name, description, picture } = req.body;
+      const story = await StoryService.create({ name, description, picture });
 
       return res.status(httpCodes.CREATED).json(story);
     } catch (error) {
@@ -15,8 +15,8 @@ class StoryController {
 
   static async update(req, res, next) {
     try {
-      const { body: { name, description }, params: { id } } = req;
-      const story = await StoryService.update({ id, name, description });
+      const { body: { name, description, picture }, params: { id } } = req;
+      const story = await StoryService.update({ id, name, description, picture });
 
       return res.status(httpCodes.OK).json(story);
     } catch (error) {

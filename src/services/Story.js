@@ -8,7 +8,7 @@ const messages = {
 };
 
 class StoryService {
-  static async create({ name, description }) {
+  static async create({ name, description, picture }) {
     const existingStory = await Story.findOne({ where: { name } });
     if (existingStory) throw new RequestError(messages.storyAlreadyExists, httpCodes.CONFLICT);
 
@@ -19,15 +19,15 @@ class StoryService {
       storyId = helpers.getRandomId('STO');
     }
 
-    const story = await Story.create({ id: storyId, name, description });
+    const story = await Story.create({ id: storyId, name, description, picture: picture || null });
     return story;
   }
 
-  static async update({ id, name, description }) {
+  static async update({ id, name, description, picture }) {
     const existingStory = await Story.findByPk(id);
     if (!existingStory) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);
 
-    const validKeys = helpers.getValidKeys({ name, description });
+    const validKeys = helpers.getValidKeys({ name, description, picture });
     if (Object.keys(validKeys).length !== 0) {
       const story = await existingStory.update(validKeys);
       return story;

@@ -12,6 +12,7 @@ router
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().not().empty().required(),
         description: Joi.string().not().empty().required(),
+        picture: Joi.string().not().empty().optional(),
       }),
     }),
     StoryController.create);
@@ -26,6 +27,7 @@ router
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().not().empty().optional(),
         description: Joi.string().not().empty().optional(),
+        picture: Joi.string().not().empty().optional(),
       }),
     }),
     StoryController.update);

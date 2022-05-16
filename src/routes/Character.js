@@ -15,6 +15,7 @@ router
         birthdate: Joi.string().not().empty().optional(),
         father: Joi.string().not().empty().optional(),
         mother: Joi.string().not().empty().optional(),
+        picture: Joi.string().not().empty().optional(),
       }),
     }),
     CharacterController.create);
@@ -32,6 +33,7 @@ router
         birthdate: Joi.string().not().empty().optional(),
         father: Joi.string().not().empty().optional(),
         mother: Joi.string().not().empty().optional(),
+        picture: Joi.string().not().empty().optional(),
       }),
     }),
     CharacterController.update);

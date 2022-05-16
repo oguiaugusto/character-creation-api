@@ -9,7 +9,7 @@ const messages = {
 };
 
 class CharacterService {
-  static async create({ storyId, name, birthdate, father, mother }) {
+  static async create({ storyId, name, birthdate, father, mother, picture }) {
     const existingCharacter = await Character.findOne({ where: { storyId, name } });
     if (existingCharacter) throw new RequestError(
       messages.characterAlreadyExists, httpCodes.CONFLICT,
@@ -22,21 +22,20 @@ class CharacterService {
       characterId = helpers.getRandomId('CHA');
     }
 
-    const validKeys = helpers.getValidKeys({ birthdate, father, mother });
+    const validKeys = helpers.getValidKeys({ birthdate, father, mother, picture });
     const character = await Character.create({ id: characterId, storyId, name, ...validKeys });
 
     return character;
   }
 
-  static async update({ id, storyId, name, birthdate, father, mother }) {
+  static async update({ id, storyId, name, birthdate, father, mother, picture }) {
     const existingCharacter = await Character.findByPk(id);
     if (!existingCharacter) throw new RequestError(messages.characterNotFound, httpCodes.NOT_FOUND);
-    console.log(father);
 
     const existingStory = await Story.findByPk(storyId || existingCharacter.dataValues.storyId);
     if (!existingStory) throw new RequestError(messages.storyNotFound, httpCodes.NOT_FOUND);
 
-    const validKeys = helpers.getValidKeys({ storyId, name, birthdate, father, mother });
+    const validKeys = helpers.getValidKeys({ storyId, name, birthdate, father, mother, picture });
     if (Object.keys(validKeys).length !== 0) {
       const character = await existingCharacter.update({ ...validKeys });
       return character;

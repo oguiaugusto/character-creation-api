@@ -4,8 +4,10 @@ const { httpCodes } = require('../utils');
 class CharacterController {
   static async create(req, res, next) {
     try {
-      const { storyId, name, birthdate, father, mother } = req.body;
-      const character = await CharacterService.create({ storyId, name, birthdate, father, mother });
+      const { storyId, name, birthdate, father, mother, picture } = req.body;
+      const character = await CharacterService.create({
+        storyId, name, birthdate, father, mother, picture,
+      });
 
       return res.status(httpCodes.CREATED).json(character);
     } catch (error) {
@@ -15,9 +17,9 @@ class CharacterController {
 
   static async update(req, res, next) {
     try {
-      const { body: { storyId, name, birthdate, father, mother }, params: { id } } = req;
+      const { body: { storyId, name, birthdate, father, mother, picture }, params: { id } } = req;
       const character = await CharacterService.update({
-        id, storyId, name, birthdate, father, mother,
+        id, storyId, name, birthdate, father, mother, picture,
       });
 
       return res.status(httpCodes.OK).json(character);

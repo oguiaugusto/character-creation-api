@@ -6,6 +6,7 @@ const messages = {
   userNotFound: 'User not found',
   userAlreadyRegistered: 'User already registered',
   credentialsError: 'User does not exist or invalid password',
+  emailAlreadyRegistered: 'Email already registered',
 };
 
 class UserService {
@@ -20,7 +21,6 @@ class UserService {
       userId = helpers.getRandomId('USR');
     }
 
-    console.log({ picture: picture || null });
     const user = await User.create({ id: userId, email, password, picture: picture || null });
     delete user.dataValues.password;
 
@@ -30,6 +30,13 @@ class UserService {
   static async update({ id, email, password, picture }) {
     const existingUser = await User.findByPk(id);
     if (!existingUser) throw new RequestError(messages.userNotFound, httpCodes.NOT_FOUND);
+
+    if (email) {
+      const existingEmail = await User.findOne({ where: { email } });
+      if (existingEmail) throw new RequestError(
+        messages.emailAlreadyRegistered, httpCodes.CONFLICT,
+      );
+    }
 
     const validKeys = helpers.getValidKeys({ email, password, picture });
     if (Object.keys(validKeys).length !== 0) {

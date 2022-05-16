@@ -29,9 +29,13 @@ class UserController {
 
   static async update(req, res, next) {
     try {
-      const { email, password, picture } = req.body;
+      const { body: { email, password, picture }, user: { id } } = req;
 
-      const user = await UserService.update({ email, password, picture });
+      if (!req.user.admin && req.params.id !== req.user.id) throw new RequestError(
+        messages.unauthorized, httpCodes.UNAUTHORIZED,
+      );
+
+      const user = await UserService.update({ id, email, password, picture });
       const token = jwtUser.sign(user);
 
       return res.status(httpCodes.OK).json({ token });

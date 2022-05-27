@@ -1,5 +1,7 @@
-const getRandomId = (prefix: string) => (
-    `${prefix}${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`
-  );
+import RequestError from './RequestError';
 
-export { getRandomId };
+const getRandomId = (prefix: string) => (
+  `${prefix}${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`
+);
+
+export { getRandomId, RequestError };

@@ -5,8 +5,7 @@
     },
     "extends": [
         "airbnb-base",
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint"
+        "plugin:@typescript-eslint/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -27,7 +26,9 @@
             {
               "ts": "never"
             }
-        ]
+        ],
+        "object-curly-newline": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     "settings": {
         "import/no-unresolved": "error",

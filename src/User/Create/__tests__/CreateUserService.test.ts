@@ -1,9 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import * as utils from '../../../utils';
 import CreateUserService from '../CreateUserService';
+import { IDS, userDTO } from './mocks';
 import MockCreateRepository from './mocks/MockCreateRepository';
-
-const IDS = ['USR10003', 'USR10002'];
 
 describe('Test CreateUserService class', () => {
   const repository = new MockCreateRepository();
@@ -49,7 +48,6 @@ describe('Test CreateUserService class', () => {
   it('handle returns an user if repository returns an user', async () => {
     jest.spyOn(utils, 'getRandomId').mockReturnValue(IDS[0]);
 
-    const userDTO = { username: 'User', password: '1234', picture: '' };
     const newUser = await createUserService.handle(userDTO);
 
     expect(newUser).toEqual({ id: IDS[0], ...userDTO, admin: false });

@@ -1,9 +1,14 @@
 import { StatusCodes } from 'http-status-codes';
-import { IUserDTO } from '../../interfaces';
+import { IUser, IUserDTO } from '../../interfaces';
 import { getRandomId, RequestError } from '../../utils';
 import { ICreateUserRepository } from '../repositories/IUserRepository';
 
-class CreateUserService {
+export interface ICreateUserService {
+  createNewId: () => Promise<string>;
+  handle: (user: IUserDTO) => Promise<IUser>;
+}
+
+class CreateUserService implements ICreateUserService {
   constructor(private repository: ICreateUserRepository) {
     this.repository = repository;
   }

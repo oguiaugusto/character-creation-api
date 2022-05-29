@@ -28,6 +28,8 @@
             }
         ],
         "object-curly-newline": "off",
+        "consistent-return": "off",
+        "import/prefer-default-export": "off",
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     "settings": {

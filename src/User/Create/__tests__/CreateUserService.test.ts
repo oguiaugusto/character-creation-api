@@ -1,8 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import * as utils from '../../../utils';
 import CreateUserService from '../CreateUserService';
-import { IDS, userDTO } from './mocks';
 import MockCreateRepository from './mocks/MockCreateRepository';
+
+const userDTO = { username: 'User', password: '1234', picture: '' };
+const IDS = ['USR10003', 'USR10002'];
 
 describe('Test CreateUserService class', () => {
   const repository = new MockCreateRepository();

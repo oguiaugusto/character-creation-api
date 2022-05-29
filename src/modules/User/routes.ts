@@ -1,6 +1,6 @@
 import { celebrate, Segments } from 'celebrate';
 import { Router } from 'express';
-import { Schemas } from '../schemas/joi';
+import { Schemas } from '../../schemas/joi';
 import { createController } from './Create';
 
 const userRouter = Router();

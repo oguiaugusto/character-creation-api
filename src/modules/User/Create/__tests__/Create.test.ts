@@ -4,7 +4,7 @@
 
 import { StatusCodes } from 'http-status-codes';
 import request from 'supertest';
-import app from '../../../api/app';
+import app from '../../../../api/app';
 
 const regularUser = { username: 'user', password: '123456', picture: 'picture.png' };
 const existingUser = { username: 'existingUser', password: '123456', picture: 'picture.png' };

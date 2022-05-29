@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
-import { IUser, IUserDTO } from '../../interfaces';
-import { ICreateUserRepository } from '../../repositories/User/IUserRepository';
-import { getRandomId, RequestError } from '../../utils';
+import { IUser, IUserDTO } from '../../../interfaces';
+import { ICreateUserRepository } from '../../../repositories/User/IUserRepository';
+import { getRandomId, RequestError } from '../../../utils';
 
 export interface ICreateUserService {
   createNewId: () => Promise<string>;

@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import * as utils from '../../../utils';
+import * as utils from '../../../../utils';
 import CreateUserService from '../CreateUserService';
 import MockCreateRepository from './mocks/MockCreateRepository';
 

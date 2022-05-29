@@ -1,5 +1,5 @@
 import { IUser, IUserDTOWithId } from '../../../../interfaces';
-import { ICreateUserRepository } from '../../../repositories/IUserRepository';
+import { ICreateUserRepository } from '../../../../repositories/User/IUserRepository';
 
 class MockCreateRepository implements ICreateUserRepository {
   private ids: string[];

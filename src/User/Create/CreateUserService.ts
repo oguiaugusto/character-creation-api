@@ -24,6 +24,10 @@ class CreateUserService implements ICreateUserService {
   };
 
   public handle = async ({ username, password, picture }: IUserDTO) => {
+    if (username.includes(' ')) {
+      throw new RequestError(StatusCodes.BAD_REQUEST, '"username", must not contain whitespaces');
+    }
+
     const id = await this.createNewId();
     const user = await this.repository.create({ id, username, password, picture });
 

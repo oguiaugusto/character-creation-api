@@ -9,11 +9,11 @@ describe('Test CreateUserService class', () => {
   const createUserService = new CreateUserService(repository);
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('createNewId returns a new id', async () => {
-    jest.spyOn(utils, 'getRandomId').mockReturnValue(IDS[0]);
+    jest.spyOn(utils, 'getRandomId').mockReturnValueOnce(IDS[0]);
 
     const newId = await createUserService.createNewId();
 
@@ -28,6 +28,21 @@ describe('Test CreateUserService class', () => {
 
     expect(utils.getRandomId).toBeCalledTimes(2);
     expect(newId).toBe(IDS[0]);
+  });
+
+  it('handle throws an error if username contains whitespace', async () => {
+    jest.spyOn(repository, 'create').mockResolvedValueOnce(null);
+
+    try {
+      await createUserService.handle({ username: 'invalid user', password: '', picture: '' });
+    } catch (error) {
+      expect(error instanceof utils.RequestError).toBe(true);
+
+      if (error instanceof utils.RequestError) {
+        expect(error.status).toBe(StatusCodes.BAD_REQUEST);
+        expect(error.message).toBe('"username", must not contain whitespaces');
+      }
+    }
   });
 
   it('handle throws an error if repository returns null', async () => {
@@ -46,7 +61,7 @@ describe('Test CreateUserService class', () => {
   });
 
   it('handle returns an user if repository returns an user', async () => {
-    jest.spyOn(utils, 'getRandomId').mockReturnValue(IDS[0]);
+    jest.spyOn(utils, 'getRandomId').mockReturnValueOnce(IDS[0]);
 
     const newUser = await createUserService.handle(userDTO);
 

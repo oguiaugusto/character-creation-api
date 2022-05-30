@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/api/server.ts",
     "dev": "tsnd src/api/server.ts",
-    "test": "jest --runInBand --verbose ./*.test.ts",
+    "test": "jest --runInBand --verbose ./*.spec.ts",
     "lint": "eslint --no-inline-config --ext .ts"
   },
   "keywords": [],

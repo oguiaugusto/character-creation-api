@@ -1,5 +1,7 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
+import ErrorMiddleware from '../middlewares/error';
+import router from '../routes';
 
 class App {
   public app: express.Express;
@@ -19,6 +21,9 @@ class App {
     this.app.get('/', (_req, res) => (
       res.status(StatusCodes.OK).json({ message: 'Server Online!' })
     ));
+
+    this.app.use(router);
+    this.app.use(ErrorMiddleware.handle);
   }
 
   public start(PORT: string | number): void {

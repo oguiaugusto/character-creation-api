@@ -1,14 +1,18 @@
 import { StatusCodes } from 'http-status-codes';
-import { IUserDTO } from '../../../interfaces/IUser';
+import { IEncoder } from '../../../interfaces/IEncoder';
+import { IUserDTO, IUserLogged } from '../../../interfaces/IUser';
 import { IUserRepository } from '../../../repositories/IUserRepository';
 import { Messages, RequestError } from '../../../utils';
 
 export interface IUserCreateService {
-  handle(user: IUserDTO): Promise<{ id: string; username: string }>;
+  handle(user: IUserDTO): Promise<IUserLogged>;
 }
 
 class UserCreateService implements IUserCreateService {
-  constructor(private repository: IUserRepository) {
+  constructor(
+    private repository: IUserRepository,
+    private encoder: IEncoder,
+  ) {
     this.repository = repository;
   }
 
@@ -19,7 +23,10 @@ class UserCreateService implements IUserCreateService {
     }
 
     const newUser = await this.repository.create(user);
-    return { id: newUser.id, username: newUser.username };
+    const userPublic = { id: newUser.id, username: newUser.username };
+
+    const token = this.encoder.sign(userPublic);
+    return { user: userPublic, token };
   };
 }
 

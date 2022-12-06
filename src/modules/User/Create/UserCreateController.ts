@@ -11,7 +11,7 @@ class UserCreateController {
     const { username, password } = req.body;
     const user = await this.service.handle({ username, password });
 
-    return res.status(StatusCodes.CREATED).json(user);
+    res.status(StatusCodes.CREATED).json(user);
   };
 }
 

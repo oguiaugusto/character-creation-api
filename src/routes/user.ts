@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import rescue from 'express-rescue';
 import { userCreateController } from '../modules/User/Create';
 
 const userRouter = Router();
@@ -6,7 +7,7 @@ const userRouter = Router();
 userRouter
   .route('/')
   .post(
-    userCreateController.handle,
+    rescue(userCreateController.handle),
   );
 
 export default userRouter;

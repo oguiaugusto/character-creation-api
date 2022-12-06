@@ -1,4 +1,5 @@
 import express from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 class App {
   public app: express.Express;
@@ -16,7 +17,7 @@ class App {
 
   private routes(): void {
     this.app.get('/', (_req, res) => (
-      res.status(200).json({ message: 'Server Online!' })
+      res.status(StatusCodes.OK).json({ message: 'Server Online!' })
     ));
   }
 

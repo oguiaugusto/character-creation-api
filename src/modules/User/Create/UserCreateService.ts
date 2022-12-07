@@ -18,12 +18,14 @@ class UserCreateService implements IUserCreateService {
   }
 
   public handle = async (user: IUserDTO) => {
-    const existingUser = await this.repository.findByUsername(user.username);
+    const { username, password } = user;
+
+    const existingUser = await this.repository.findByUsername(username);
     if (existingUser) {
       throw new RequestError(Messages.USER_ALREADY_EXISTS, StatusCodes.CONFLICT);
     }
-    const encryptedPassword = await Encrypter.encrypt(user.password);
 
+    const encryptedPassword = await Encrypter.encrypt(password);
     const newUser = await this.repository.create({ ...user, password: encryptedPassword });
     const userPublic = { id: newUser.id, username: newUser.username };
 

@@ -28,13 +28,6 @@
             2,
             "single"
         ],
-        "@typescript-eslint/no-unused-vars": [
-            "error",
-            {
-                "argsIgnorePattern": "^_",
-                "ignoreRestSiblings": true
-            }
-        ],
         "no-unused-vars": [
             "error",
             {
@@ -45,6 +38,14 @@
         "object-curly-newline": "off",
         "import/prefer-default-export": "off",
         "no-console": "off",
-        "@typescript-eslint/lines-between-class-members": "off"
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 8 }],
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_",
+                "ignoreRestSiblings": true
+            }
+        ]
     }
 }

@@ -1,4 +1,5 @@
 enum Messages {
+  SERVER_ONLINE = 'Server Online!',
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
   USER_ALREADY_EXISTS = 'User already exists',
   USER_NOT_FOUND_USERNAME = 'User not found, check your username',

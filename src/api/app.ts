@@ -3,6 +3,7 @@ import cors from 'cors';
 import { StatusCodes } from 'http-status-codes';
 import ErrorMiddleware from '../middlewares/error';
 import router from '../routes';
+import { Messages } from '../utils';
 
 class App {
   public app: express.Express;
@@ -29,7 +30,7 @@ class App {
 
   private routes(): void {
     this.app.get('/', (_req, res) => (
-      res.status(StatusCodes.OK).json({ message: 'Server Online!' })
+      res.status(StatusCodes.OK).json({ message: Messages.SERVER_ONLINE })
     ));
 
     this.app.use(router);

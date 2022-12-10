@@ -44,4 +44,5 @@ class App {
   }
 }
 
+export const { app } = new App();
 export default App;

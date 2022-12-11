@@ -9,4 +9,4 @@ const userLoginService = new UserLoginService(
 );
 const userLoginController = new UserLoginController(userLoginService);
 
-export { userLoginController };
+export { userLoginService, userLoginController };

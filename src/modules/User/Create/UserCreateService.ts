@@ -11,7 +11,7 @@ export interface IUserCreateService {
 
 class UserCreateService implements IUserCreateService {
   constructor(
-    private repository: IUserRepository,
+    public repository: IUserRepository,
     private encoder: IEncoder,
   ) {
     this.repository = repository;

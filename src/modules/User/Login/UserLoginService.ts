@@ -11,7 +11,7 @@ export interface IUserLoginService {
 
 class UserLoginService {
   constructor(
-    private repository: IUserRepository,
+    public repository: IUserRepository,
     private encoder: IEncoder,
   ) {
     this.repository = repository;

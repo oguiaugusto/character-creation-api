@@ -9,4 +9,4 @@ const userCreateService = new UserCreateService(
 );
 const userCreateController = new UserCreateController(userCreateService);
 
-export { userCreateController };
+export { userCreateService, userCreateController };

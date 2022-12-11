@@ -6,6 +6,7 @@ import { app } from '../../api/app';
 import { Messages } from '../../utils';
 import { userMock } from '../mocks/userMock';
 import { userCreateService } from '../../modules/User/Create';
+import { IUser, IUserDTO } from '../../interfaces/IUser';
 import jwtUser from '../../utils/JWTUser';
 
 chai.use(chaiHttp);
@@ -15,11 +16,20 @@ describe('Endpoint POST /users', () => {
   const request = async (body: any = {}) => (
     chai.request(app).post('/users').send(body)
   );
-  const mockedRepositoryFind = sinon.stub(userCreateService.repository, 'findByUsername');
-  const mockedRepositoryCreate = sinon.stub(userCreateService.repository, 'create');
+  let mockedRepositoryFind: sinon.SinonStub<[username: string], Promise<IUser | null>>;
+  let mockedRepositoryCreate: sinon.SinonStub<[user: IUserDTO], Promise<IUser>>;
+
+  before(() => {
+    mockedRepositoryFind = sinon.stub(userCreateService.repository, 'findByUsername');
+    mockedRepositoryCreate = sinon.stub(userCreateService.repository, 'create');
+  });
+
+  after(() => {
+    mockedRepositoryFind.restore();
+    mockedRepositoryCreate.restore();
+  });
 
   describe('On sucess', () => {
-
     before(() => {
       mockedRepositoryFind.resolves(null);
       mockedRepositoryCreate.resolves(userMock);
@@ -28,7 +38,7 @@ describe('Endpoint POST /users', () => {
     after(() => {
       mockedRepositoryFind.reset();
       mockedRepositoryCreate.reset();
-    });
+    }); // "after" is not really needed in this case, since i'm replacing the stubs in the next "before" hook
 
     it('should return status 201 and body with user and token', async () => {
       const response = await request({ username: userMock.username, password: userMock.password });

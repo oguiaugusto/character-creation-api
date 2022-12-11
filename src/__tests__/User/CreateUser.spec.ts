@@ -2,20 +2,19 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import sinon from 'sinon';
 import { StatusCodes } from 'http-status-codes';
-import { app } from '../../api/app';
 import { Messages } from '../../utils';
 import { userMock } from '../mocks/userMock';
 import { userCreateService } from '../../modules/User/Create';
 import { IUser, IUserDTO } from '../../interfaces/IUser';
 import jwtUser from '../../utils/JWTUser';
+import createChaiRequest from '../utils/createChaiRequest';
 
 chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Endpoint POST /users', () => {
-  const request = async (body: any = {}) => (
-    chai.request(app).post('/users').send(body)
-  );
+  const request = createChaiRequest('/users');
+
   let mockedRepositoryFind: sinon.SinonStub<[username: string], Promise<IUser | null>>;
   let mockedRepositoryCreate: sinon.SinonStub<[user: IUserDTO], Promise<IUser>>;
 

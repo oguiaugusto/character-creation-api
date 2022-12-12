@@ -1,10 +1,10 @@
-import { memoryUserRepository } from '../../../repositories';
+import { userRepository } from '../../../repositories';
 import jwtUser from '../../../utils/JWTUser';
 import UserCreateController from './UserCreateController';
 import UserCreateService from './UserCreateService';
 
 const userCreateService = new UserCreateService(
-  memoryUserRepository,
+  userRepository,
   jwtUser,
 );
 const userCreateController = new UserCreateController(userCreateService);

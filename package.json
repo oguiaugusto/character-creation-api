@@ -5,7 +5,7 @@
   "main": "src/api/server.ts",
   "scripts": {
     "start": "ts-node src/api/server.ts",
-    "dev": "ts-node-dev src/api/server.ts",
+    "dev": "ts-node-dev --exit-child --respawn --transpile-only --watch src src/api/server.ts",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "test": "mocha --require ts-node/register src/__tests__/**/*.spec.ts --exit",
     "test:coverage": "nyc npm run test"

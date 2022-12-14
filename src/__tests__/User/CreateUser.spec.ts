@@ -7,7 +7,7 @@ import { userMock } from '../mocks/userMock';
 import { userCreateService } from '../../modules/User/Create';
 import { IUser, IUserDTO } from '../../interfaces/IUser';
 import jwtUser from '../../utils/JWTUser';
-import createChaiRequest from '../utils/createChaiRequest';
+import CreateChaiRequest from '../utils/CreateChaiRequest';
 import validateCredentials from '../utils/validateCredentials';
 
 chai.use(chaiHttp);
@@ -15,7 +15,7 @@ const { expect } = chai;
 const ENDPOINT = '/users';
 
 describe(`Endpoint POST ${ENDPOINT}`, () => {
-  const request = createChaiRequest(ENDPOINT);
+  const request = CreateChaiRequest.post(ENDPOINT);
 
   let mockedRepositoryFind: sinon.SinonStub<[username: string], Promise<IUser | null>>;
   let mockedRepositoryCreate: sinon.SinonStub<[user: IUserDTO], Promise<IUser>>;

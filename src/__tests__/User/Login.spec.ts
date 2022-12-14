@@ -9,7 +9,7 @@ import { userCreateService } from '../../modules/User/Create';
 import { IUser } from '../../interfaces/IUser';
 import jwtUser from '../../utils/JWTUser';
 import Encrypter from '../../utils/Encrypter';
-import createChaiRequest from '../utils/createChaiRequest';
+import CreateChaiRequest from '../utils/CreateChaiRequest';
 import validateCredentials from '../utils/validateCredentials';
 
 chai.use(chaiHttp);
@@ -17,7 +17,7 @@ const { expect } = chai;
 const ENDPOINT = '/users/login';
 
 describe(`Endpoint POST ${ENDPOINT}`, () => {
-  const request = createChaiRequest(ENDPOINT);
+  const request = CreateChaiRequest.post(ENDPOINT);
   let mockedRepositoryFind: sinon.SinonStub<[username: string], Promise<IUser | null>>;
 
   before(() => {

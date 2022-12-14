@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 import { userMock } from '../mocks/userMock';
-import createChaiRequest from './createChaiRequest';
+import CreateChaiRequest from './CreateChaiRequest';
 
 const validateCredentials = (endpoint: string) => {
-  const request = createChaiRequest(endpoint);
+  const request = CreateChaiRequest.post(endpoint);
 
   it('should return status 400 and a message indicating that username is required', async () => {
     const response = await request({ password: userMock.password });

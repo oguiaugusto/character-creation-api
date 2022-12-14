@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { IEncoder } from '../../../interfaces/IEncoder';
 import { IUserDTO, IUserLogged } from '../../../interfaces/IUser';
-import { IUserRepository } from '../../../repositories/IUserRepository';
+import { IUserRepository } from '../../../repositories/User/IUserRepository';
 import { Messages, RequestError } from '../../../utils';
 import Encrypter from '../../../utils/Encrypter';
 

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
 import { IEncoder } from '../../../interfaces/IEncoder';
 import { IUserDTO, IUserLogged } from '../../../interfaces/IUser';
-import { IUserRepository } from '../../../repositories/IUserRepository';
+import { IUserRepository } from '../../../repositories/User/IUserRepository';
 import { Messages, RequestError } from '../../../utils';
 
 export interface IUserLoginService {

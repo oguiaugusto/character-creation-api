@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { IUser, IUserDTO } from '../interfaces/IUser';
+import { IUser, IUserDTO } from '../../interfaces/IUser';
 import { IUserRepository } from './IUserRepository';
 
 class MemoryUserRepository implements IUserRepository {

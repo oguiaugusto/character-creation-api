@@ -1,4 +1,4 @@
-import { userRepository } from '../../../repositories';
+import { userRepository } from '../../../repositories/User';
 import jwtUser from '../../../utils/JWTUser';
 import UserCreateController from './UserCreateController';
 import UserCreateService from './UserCreateService';

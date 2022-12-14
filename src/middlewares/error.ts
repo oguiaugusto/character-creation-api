@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { CelebrateError, isCelebrateError } from 'celebrate';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
 import { Messages, RequestError } from '../utils';
 
@@ -23,6 +24,16 @@ class ErrorMiddleware {
       const { message: celMessage, status: celStatus } = ErrorMiddleware.getCelebrateValues(err);
       status = celStatus;
       message = celMessage;
+    }
+
+    if (err instanceof JsonWebTokenError) {
+      status = StatusCodes.UNAUTHORIZED;
+      message = Messages.INVALID_TOKEN;
+    }
+
+    if (err instanceof TokenExpiredError) {
+      status = StatusCodes.UNAUTHORIZED;
+      message = Messages.TOKEN_EXPIRED;
     }
 
     if (err instanceof RequestError) {

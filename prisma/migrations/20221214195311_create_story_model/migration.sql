@@ -3,6 +3,7 @@ CREATE TABLE "Story" (
     "id" TEXT NOT NULL,
     "title" VARCHAR(100) NOT NULL,
     "description" VARCHAR(510),
+    "picture" VARCHAR(2048),
     "authorId" TEXT NOT NULL,
 
     CONSTRAINT "Story_pkey" PRIMARY KEY ("id")

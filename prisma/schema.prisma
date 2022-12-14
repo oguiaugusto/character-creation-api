@@ -19,7 +19,7 @@ model User {
 
 model Story {
   id String @id @default(uuid())
-  name String @db.VarChar(100)
+  title String @db.VarChar(100)
   description String? @db.VarChar(510)
   author User @relation(fields: [authorId], references: [id])
   authorId String

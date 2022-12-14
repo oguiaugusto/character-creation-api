@@ -50,7 +50,7 @@ describe(`Endpoint POST ${ENDPOINT}`, () => {
     });
   });
 
-  describe('On fail', () => {
+  describe('On failure', () => {
     before(() => {
       mockedRepositoryFind.resolves(userMock);
       mockedRepositoryCreate.resolves(userMock); // This is not necessary, but it's here to avoid a warning

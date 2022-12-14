@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Story" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(100) NOT NULL,
+    "title" VARCHAR(100) NOT NULL,
     "description" VARCHAR(510),
     "authorId" TEXT NOT NULL,
 

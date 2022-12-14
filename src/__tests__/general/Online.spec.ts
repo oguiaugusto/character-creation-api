@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { StatusCodes } from 'http-status-codes';
-import { app } from '../api/app';
-import { Messages } from '../utils';
+import { app } from '../../api/app';
+import { Messages } from '../../utils';
 
 chai.use(chaiHttp);
 const { expect } = chai;

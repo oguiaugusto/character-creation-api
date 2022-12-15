@@ -12,7 +12,7 @@ export type ReqWithUser = Request & { user: IUserPublic };
 class UserAuth {
   constructor(
     public repository: IUserRepository,
-    private encoder: IEncoder,
+    public encoder: IEncoder,
   ) {
     this.repository = repository;
   }

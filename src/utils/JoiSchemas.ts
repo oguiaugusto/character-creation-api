@@ -12,7 +12,7 @@ class Schemas {
     return Joi.object().keys({
       title: Joi.string().min(3).max(100).required(),
       description: Joi.string().min(3).max(510).optional(),
-      picture: Joi.string().min(3).max(2048).optional(),
+      picture: Joi.string().uri().optional(),
     });
   }
 }

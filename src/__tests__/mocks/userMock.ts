@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { IUser } from '../../interfaces/IUser';
+import { IUser, IUserPublic } from '../../interfaces/IUser';
 
 const userMock: IUser = {
   id: v4(),
@@ -7,4 +7,9 @@ const userMock: IUser = {
   password: '123456'
 };
 
-export { userMock };
+const userPublicMock: IUserPublic = {
+  id: userMock.id,
+  username: userMock.username,
+}
+
+export { userMock, userPublicMock };

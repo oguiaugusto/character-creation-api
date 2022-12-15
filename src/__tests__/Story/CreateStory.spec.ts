@@ -3,14 +3,14 @@ import chaiHttp from 'chai-http';
 import sinon from 'sinon';
 import CreateChaiRequest from '../utils/CreateChaiRequest';
 import jwtUser from '../../utils/JWTUser';
+import validateStoryFields from '../utils/validateStoryFields';
 import { StatusCodes } from 'http-status-codes';
-import { userMock, userPublicMock } from '../mocks/userMock';
+import { userPublicMock } from '../mocks/userMock';
 import { IStory, IStoryDTO } from '../../interfaces/IStory';
 import { storyCreateService } from '../../modules/Story/Create';
 import { storyDTOMock, storyMock, storyMockOnlyRequiredFields } from '../mocks/storyMock';
 import { mockUserFindById, restoreUserFindById } from '../utils/passUserAuth';
 import { Messages } from '../../utils';
-import validateStoryFields from '../utils/validateStoryFields';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -67,5 +67,26 @@ describe('Endpoint POST /stories', () => {
 
       expect(response.body).to.be.deep.equal(storyMockOnlyRequiredFields);
     });
+  });
+
+  describe('On failure', () => {
+    before(() => {
+      mockedRepositoryFindByTitle.resolves([storyMock]);
+      mockedRepositoryCreate.resolves(storyMock); // This is not used
+    });
+
+    after(() => {
+      mockedRepositoryFindByTitle.reset();
+      mockedRepositoryCreate.reset();
+    });
+
+    it(`should return status 409 and message: "${Messages.STORY_WITH_SAME_TITLE}" if the author already has a story with the same title`, async () => {
+      const response = await request(storyDTOMock);
+
+      expect(response.status).to.be.equal(StatusCodes.CONFLICT);
+      expect(response.body).to.have.property('message', Messages.STORY_WITH_SAME_TITLE);
+    });
+
+    validateStoryFields(ENDPOINT, validToken);
   });
 });

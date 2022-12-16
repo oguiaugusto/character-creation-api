@@ -16,7 +16,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 const ENDPOINT = '/stories/my-stories';
 
-describe('Endpoint POST /stories', () => {
+describe('Endpoint GET /stories/my-stories', () => {
   const validToken = jwtUser.sign(userPublicMock);
   const request = CreateChaiRequest.getWithToken(ENDPOINT, validToken);
 

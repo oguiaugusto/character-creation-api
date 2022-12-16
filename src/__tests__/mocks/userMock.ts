@@ -12,4 +12,20 @@ const userPublicMock: IUserPublic = {
   username: userMock.username,
 }
 
-export { userMock, userPublicMock };
+const anotherUserMock: IUser = {
+  id: v4(),
+  username: 'anotherUser',
+  password: '123456'
+}
+
+const anotherUserPublicMock: IUserPublic = {
+  id: anotherUserMock.id,
+  username: anotherUserMock.username,
+};
+
+export {
+  userMock,
+  userPublicMock,
+  anotherUserMock,
+  anotherUserPublicMock,
+};

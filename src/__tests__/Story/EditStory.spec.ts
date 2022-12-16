@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import CreateChaiRequest from '../utils/CreateChaiRequest';
 import jwtUser from '../../utils/JWTUser';
 import { StatusCodes } from 'http-status-codes';
-import { userPublicMock } from '../mocks/userMock';
+import { anotherUserMock, userPublicMock } from '../mocks/userMock';
 import { IStory, IStoryDTO } from '../../interfaces/IStory';
 import { storyEditService } from '../../modules/Story/Edit';
 import { storyEditedDTOMock, storyEditedMock, storyMock } from '../mocks/storyMock';
@@ -17,7 +17,9 @@ const ENDPOINT = (id: string) => `/stories/:${id}`;
 
 describe('Endpoint PATCH /stories/:id', () => {
   const validToken = jwtUser.sign(userPublicMock);
+  const anotherUserValidToken = jwtUser.sign(anotherUserMock);
   const request = (id: string, body: any = {}) => CreateChaiRequest.patchWithToken(ENDPOINT(id), validToken)(body);
+  const requestWithAnotherUserToken = (id: string, body: any = {}) => CreateChaiRequest.patchWithToken(ENDPOINT(id), anotherUserValidToken)(body);
 
   let mockedRepositoryFindById: sinon.SinonStub<[id: string], Promise<IStory | null>>;
   let mockedRepositoryFindByTitle: sinon.SinonStub<[title: string], Promise<IStory[]>>
@@ -80,6 +82,7 @@ describe('Endpoint PATCH /stories/:id', () => {
     before(() => {
       mockedRepositoryFindById.onFirstCall().resolves(null);
       mockedRepositoryFindById.onSecondCall().resolves(storyMock);
+      mockedRepositoryFindById.onThirdCall().resolves(storyMock);
 
       mockedRepositoryFindByTitle.resolves([{ ...storyMock, title: storyEditedMock.title }]);
       mockedRepositoryEditFields.resolves(storyEditedMock); // This is not used
@@ -96,6 +99,13 @@ describe('Endpoint PATCH /stories/:id', () => {
 
       expect(response.status).to.be.equal(StatusCodes.NOT_FOUND);
       expect(response.body).to.have.property('message', Messages.STORY_NOT_FOUND);
+    });
+
+    it(`should return status 403 and message: "${Messages.YOU_DONT_HAVE_PERMISSION}" if the user is not the owner of the story`, async () => {
+      const response = await requestWithAnotherUserToken(storyMock.id, storyEditedDTOMock);
+
+      expect(response.status).to.be.equal(StatusCodes.FORBIDDEN);
+      expect(response.body).to.have.property('message', Messages.YOU_DONT_HAVE_PERMISSION);
     });
 
     it(`should return status 409 and message: ${Messages.STORY_WITH_SAME_TITLE} if so`, async () => {

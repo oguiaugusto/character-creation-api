@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
 import { storyCreateController } from '../modules/Story/Create';
 import { storyGetMyStoriesController } from '../modules/Story/GetMyStories';
+import { storyEditController } from '../modules/Story/Edit';
 import Schemas from '../utils/JoiSchemas';
 
 const storyRouter = Router();
@@ -18,6 +19,13 @@ storyRouter
   .route('/my-stories')
   .get(
     rescue(storyGetMyStoriesController.handle),
+  );
+
+storyRouter
+  .route('/:id')
+  .patch(
+    celebrate({ [Segments.BODY]: Schemas.editStory }),
+    rescue(storyEditController.handle),
   );
 
 export default storyRouter;

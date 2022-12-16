@@ -9,23 +9,17 @@ class PrismaUserRepository implements IUserRepository {
     this.prisma = new PrismaClient();
   }
 
-  public create = async (user: IUserDTO) => {
-    const newUser = await this.prisma.user.create({ data: user });
+  public create = async (user: IUserDTO) => (
+    this.prisma.user.create({ data: user })
+  );
 
-    return newUser;
-  };
+  public findByUsername = async (username: string) => (
+    this.prisma.user.findUnique({ where: { username } })
+  );
 
-  public findByUsername = async (username: string) => {
-    const user = await this.prisma.user.findUnique({ where: { username } });
-
-    return user;
-  };
-
-  public findById = async (id: string) => {
-    const user = await this.prisma.user.findUnique({ where: { id } });
-
-    return user;
-  };
+  public findById = async (id: string) => (
+    this.prisma.user.findUnique({ where: { id } })
+  );
 }
 
 export default PrismaUserRepository;

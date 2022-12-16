@@ -9,23 +9,17 @@ class PrismaStoryRepository implements IStoryRepository {
     this.prisma = new PrismaClient();
   }
 
-  public create = async (story: IStoryDTO) => {
-    const newStory = await this.prisma.story.create({ data: story });
+  public create = async (story: IStoryDTO) => (
+    this.prisma.story.create({ data: story })
+  );
 
-    return newStory;
-  };
+  public findById = async (id: string) => (
+    this.prisma.story.findUnique({ where: { id } })
+  );
 
-  public findById = async (id: string) => {
-    const story = await this.prisma.story.findUnique({ where: { id } });
-
-    return story;
-  };
-
-  public findByTitle = async (title: string) => {
-    const story = await this.prisma.story.findMany({ where: { title } });
-
-    return story;
-  };
+  public findByTitle = async (title: string) => (
+    this.prisma.story.findMany({ where: { title } })
+  );
 }
 
 export default PrismaStoryRepository;

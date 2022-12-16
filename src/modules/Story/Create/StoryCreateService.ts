@@ -15,7 +15,7 @@ class StoryCreateService implements IStoryCreateService {
   public handle = async (story: IStoryDTO) => {
     const storiesWithSameTitle = await this.repository.findByTitle(story.title);
     const authorHasStoryWithSameTitle = storiesWithSameTitle
-      ?.some((sameTitleStory) => (sameTitleStory.authorId === story.authorId));
+      .some((sameTitleStory) => (sameTitleStory.authorId === story.authorId));
 
     if (authorHasStoryWithSameTitle) {
       throw new RequestError(Messages.STORY_WITH_SAME_TITLE, StatusCodes.CONFLICT);

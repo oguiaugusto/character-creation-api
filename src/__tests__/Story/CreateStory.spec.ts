@@ -39,7 +39,7 @@ describe('Endpoint POST /stories', () => {
 
   describe('On success', () => {
     before(() => {
-      mockedRepositoryFindByTitle.resolves(null);
+      mockedRepositoryFindByTitle.resolves([]);
     });
 
     after(() => {

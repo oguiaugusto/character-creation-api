@@ -12,7 +12,7 @@ class StoryGetMyStoriesController {
     const { id } = req.user;
     const stories = await this.service.handle(id);
 
-    res.status(StatusCodes.OK).json(stories);
+    res.status(StatusCodes.OK).json({ stories });
   };
 }
 

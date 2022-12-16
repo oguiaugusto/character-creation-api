@@ -20,6 +20,10 @@ class PrismaStoryRepository implements IStoryRepository {
   public findByTitle = async (title: string) => (
     this.prisma.story.findMany({ where: { title } })
   );
+
+  public findByAuthor = async (authorId: string) => (
+    this.prisma.story.findMany({ where: { authorId } })
+  );
 }
 
 export default PrismaStoryRepository;

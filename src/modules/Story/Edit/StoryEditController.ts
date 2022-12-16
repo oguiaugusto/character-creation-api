@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ReqWithUser } from '../../../middlewares/userAuth';
 import { IStoryEditService } from './StoryEditService';
 
 class StoryEditController {
@@ -7,10 +8,13 @@ class StoryEditController {
     this.service = service;
   }
 
-  public handle = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const editedStory = await this.service.handle(id, req.body);
+  public handle = async (req: ReqWithUser, res: Response) => {
+    const {
+      params: { id: storyId },
+      user: { id: authorId },
+    } = req;
 
+    const editedStory = await this.service.handle(storyId, authorId, req.body);
     res.status(StatusCodes.OK).json(editedStory);
   };
 }

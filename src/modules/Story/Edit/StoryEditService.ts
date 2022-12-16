@@ -5,7 +5,7 @@ import { Messages, RequestError } from '../../../utils';
 import StoryUtils from '../utils';
 
 export interface IStoryEditService {
-  handle(id: string, fields: Partial<IStoryDTO>): Promise<IStory>;
+  handle(id: string, authorId: string, fields: Partial<IStoryDTO>): Promise<IStory>;
 }
 
 class StoryEditService {
@@ -13,10 +13,14 @@ class StoryEditService {
     this.repository = repository;
   }
 
-  public handle = async (id: string, fields: Partial<IStoryDTO>) => {
+  public handle = async (id: string, authorId: string, fields: Partial<IStoryDTO>) => {
     const existingStory = await this.repository.findById(id);
     if (!existingStory) {
       throw new RequestError(Messages.STORY_NOT_FOUND, StatusCodes.NOT_FOUND);
+    }
+
+    if (existingStory.authorId !== authorId) {
+      throw new RequestError(Messages.YOU_DONT_HAVE_PERMISSION, StatusCodes.FORBIDDEN);
     }
 
     if (fields.title) {

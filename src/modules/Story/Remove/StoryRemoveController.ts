@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ReqWithUser } from '../../../middlewares/userAuth';
 import { IStoryRemoveService } from './StoryRemoveService';
 
 class StoryRemoveController {
@@ -7,10 +8,13 @@ class StoryRemoveController {
     this.service = service;
   }
 
-  public handle = async (req: Request, res: Response) => {
-    const { id } = req.params;
+  public handle = async (req: ReqWithUser, res: Response) => {
+    const {
+      params: { id: storyId },
+      user: { id: authorId },
+    } = req;
 
-    await this.service.handle(id);
+    await this.service.handle(storyId, authorId);
     res.status(StatusCodes.NO_CONTENT).end();
   };
 }

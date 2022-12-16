@@ -10,6 +10,7 @@ enum Messages {
   STORY_WITH_SAME_TITLE = 'You already have a story with this title',
   AUTHOR_DOES_NOT_EXIST = 'Author does not exist',
   STORY_NOT_FOUND = 'Story not found',
+  YOU_DONT_HAVE_PERMISSION = 'You don\'t have permission to do this',
 }
 
 export default Messages;

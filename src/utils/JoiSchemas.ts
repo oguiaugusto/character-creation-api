@@ -22,7 +22,7 @@ class Schemas {
 
   public static get editStory() {
     return Joi.object().keys({
-      title: Joi.string().min(3).max(100).optional(),
+      title: TITLE_KEY.optional(),
       description: DESCRIPTION_KEY.optional(),
       picture: PICTURE_KEY.optional(),
     });

@@ -12,7 +12,7 @@ const storyMock: IStory = {
 
 const storyMockOnlyRequiredFields = {
   id: v4(),
-  title: 'story title',
+  title: 'story title 2',
   description: null,
   picture: null,
   authorId: userMock.id,
@@ -24,4 +24,9 @@ const storyDTOMock = {
   picture: storyMock.picture,
 };
 
-export { storyMock, storyMockOnlyRequiredFields, storyDTOMock };
+const storiesMock = [
+  storyMock,
+  storyMockOnlyRequiredFields,
+]
+
+export { storyMock, storyMockOnlyRequiredFields, storyDTOMock, storiesMock };

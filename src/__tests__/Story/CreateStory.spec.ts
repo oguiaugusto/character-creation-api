@@ -57,11 +57,11 @@ describe('Endpoint POST /stories', () => {
 
     it('should return status 201 and the story created if description and picture are not provided', async () => {
       mockedRepositoryCreate.resolves(storyMockOnlyRequiredFields);
-      const response = await request({ title: storyDTOMock.title });
+      const response = await request({ title: storyMockOnlyRequiredFields.title });
 
       expect(response.status).to.be.equal(StatusCodes.CREATED);
 
-      expect(response.body.title).to.be.equal(storyDTOMock.title);
+      expect(response.body.title).to.be.equal(storyMockOnlyRequiredFields.title);
       expect(response.body.description).to.be.equal(null);
       expect(response.body.picture).to.be.equal(null);
 

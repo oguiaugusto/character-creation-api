@@ -24,6 +24,10 @@ class PrismaStoryRepository implements IStoryRepository {
   public findByAuthor = async (authorId: string) => (
     this.prisma.story.findMany({ where: { authorId } })
   );
+
+  public editFields = async (id: string, fields: Partial<IStoryDTO>) => (
+    this.prisma.story.update({ where: { id }, data: fields })
+  );
 }
 
 export default PrismaStoryRepository;

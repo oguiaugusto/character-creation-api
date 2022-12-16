@@ -28,6 +28,10 @@ class PrismaStoryRepository implements IStoryRepository {
   public editFields = async (id: string, fields: Partial<IStoryDTO>) => (
     this.prisma.story.update({ where: { id }, data: fields })
   );
+
+  public remove = async (id: string) => (
+    this.prisma.story.delete({ where: { id } })
+  );
 }
 
 export default PrismaStoryRepository;

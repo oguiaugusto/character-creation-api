@@ -6,4 +6,5 @@ export interface IStoryRepository {
   findByTitle(title: string): Promise<IStory[]>;
   findByAuthor(authorId: string): Promise<IStory[]>;
   editFields(id: string, fields: Partial<IStoryDTO>): Promise<IStory>;
+  remove(id: string): Promise<IStory>;
 }

@@ -9,6 +9,7 @@ enum Messages {
   TOKEN_EXPIRED = 'Token expired',
   STORY_WITH_SAME_TITLE = 'You already have a story with this title',
   AUTHOR_DOES_NOT_EXIST = 'Author does not exist',
+  STORY_NOT_FOUND = 'Story not found',
 }
 
 export default Messages;

@@ -24,9 +24,30 @@ const storyDTOMock = {
   picture: storyMock.picture,
 };
 
+const storyEditedMock: IStory = {
+  id: storyMock.id,
+  title: 'story title edited',
+  description: 'story description edited',
+  picture: 'https://story-picture-edited.com',
+  authorId: userMock.id,
+};
+
+const storyEditedDTOMock = {
+  title: storyEditedMock.title,
+  description: storyEditedMock.description,
+  picture: storyEditedMock.picture,
+};
+
 const storiesMock = [
   storyMock,
   storyMockOnlyRequiredFields,
 ]
 
-export { storyMock, storyMockOnlyRequiredFields, storyDTOMock, storiesMock };
+export {
+  storyMock,
+  storyMockOnlyRequiredFields,
+  storyDTOMock,
+  storyEditedMock,
+  storyEditedDTOMock,
+  storiesMock,
+};

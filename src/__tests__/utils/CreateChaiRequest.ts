@@ -17,6 +17,10 @@ class CreateChaiRequest {
   public static patchWithToken = (endpoint: string, token: string) => async (body: any = {}) => {
     return chai.request(app).patch(endpoint).set('Authorization', token).send(body);
   }
+
+  public static deleteWithToken = (endpoint: string, token: string) => async () => {
+    return chai.request(app).delete(endpoint).set('Authorization', token);
+  }
 }
 
 export default CreateChaiRequest;

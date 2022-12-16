@@ -7,7 +7,7 @@ export interface IStoryRemoveService {
 }
 
 class StoryRemoveService {
-  constructor(private repository: IStoryRepository) {
+  constructor(public repository: IStoryRepository) {
     this.repository = repository;
   }
 

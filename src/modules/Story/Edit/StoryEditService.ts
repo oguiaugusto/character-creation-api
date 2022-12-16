@@ -8,7 +8,7 @@ export interface IStoryEditService {
 }
 
 class StoryEditService {
-  constructor(private repository: IStoryRepository) {
+  constructor(public repository: IStoryRepository) {
     this.repository = repository;
   }
 
